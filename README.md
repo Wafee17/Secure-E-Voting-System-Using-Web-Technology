@@ -1,5 +1,5 @@
 
-# 🗳️ Online Voting System
+# 🗳️ Secure-E-Voting-System-Using-Web-Technology
 
 A secure and user-friendly Online Voting System built using PHP and MySQL. This project supports user registration, login, voting, and a password reset feature using OTP (sent via PHPMailer).
 
@@ -50,7 +50,7 @@ Make sure the following are installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/online-voting-system.git
+git clone https://github.com/Wafee17/Secure-E-Voting-System-Using-Web-Technology.git
 ```
 
 ### 2. Move the project to your server directory
