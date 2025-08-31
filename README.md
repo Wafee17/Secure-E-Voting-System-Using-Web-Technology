@@ -69,6 +69,7 @@ composer install
    - In phpMyAdmin, select your database
    - Click on "Import" tab
    - Choose the SQL file and click "Go"
+5. **Important**: The SQL file contains only table structure (no sample data)
 
 ### 4. Database Configuration
 Update the database connection in `admin/inc/config.php`:
@@ -83,7 +84,20 @@ Configure PHPMailer settings for OTP delivery in the relevant files:
 - `otp_verification.php`
 - `verify_otp.php`
 
-### 6. Access the Application
+### 6. Admin Account Setup
+**Important**: By default, all new user accounts are created with `user_role = 'Voter'`. To access the admin panel, you need to:
+
+1. **Register a new account** through the voter interface
+2. **Access phpMyAdmin** and go to the `users` table
+3. **Edit the user record** and change `user_role` from `'Voter'` to `'Admin'`
+4. **Save the changes**
+
+**Alternative Method (SQL Command):**
+```sql
+UPDATE users SET user_role = 'Admin' WHERE username = 'your_username';
+```
+
+### 7. Access the Application
 - **Admin Panel**: `http://localhost/onlinevotingsystem/admin/`
 - **Voter Interface**: `http://localhost/onlinevotingsystem/`
 
@@ -126,7 +140,7 @@ CREATE TABLE `users` (
   `email` varchar(45) DEFAULT NULL,
   `mobile_number` varchar(45) DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `user_role` varchar(45) DEFAULT NULL,
+  `user_role` varchar(45) DEFAULT 'Voter',
   `otp` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -239,6 +253,7 @@ onlinevotingsystem/
    - Verify XAMPP/WAMP is running
    - Check database credentials in `config.php`
    - Ensure MySQL service is active
+   - **Note**: The database starts empty - you need to create your first admin account
 
 2. **Email Not Sending**
    - Verify PHPMailer configuration
