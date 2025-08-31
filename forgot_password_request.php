@@ -31,12 +31,12 @@ if (isset($_POST['request_reset'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'votingsystem0000@gmail.com';
+            $mail->Username = 'your-email@gmail.com';
             $mail->Password = 'laolmxwhvpcvrprf'; // Use an app password here
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('votingsystem0000@gmail.com', 'Online Voting System');
+            $mail->setFrom('your-email@gmail.com', 'Online Voting System');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'OTP for Password Reset';
