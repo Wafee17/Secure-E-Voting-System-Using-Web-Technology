@@ -221,12 +221,12 @@ if (isset($_POST['sign_up_btn'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'votingsystem0000@gmail.com';
-            $mail->Password = 'laolmxwhvpcvrprf';  // Use your SMTP credentials
+            $mail->Username = 'your-email@gmail.com';
+            $mail->Password = 'your-app-password';  // Use your SMTP credentials
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('votingsystem0000@gmail.com', 'Online Voting System');
+            $mail->setFrom('your-email@gmail.com', 'Online Voting System');
             $mail->addAddress($su_email);
             $mail->isHTML(true);
             $mail->Subject = 'OTP Verification';
@@ -292,12 +292,12 @@ elseif (isset($_POST['loginBtn'])) {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'votingsystem0000@gmail.com';
-                $mail->Password = 'laolmxwhvpcvrprf'; // Use an app password here
+                $mail->Username = 'your-email@gmail.com';
+                $mail->Password = 'your-app-password'; // Use an app password here
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
-                $mail->setFrom('votingsystem0000@gmail.com', 'Online Voting System');
+                $mail->setFrom('your-email@gmail.com', 'Online Voting System'); //use your email 
                 $mail->addAddress($data['email']);
                 $mail->isHTML(true);
 				$mail->Subject = 'OTP Verification';
