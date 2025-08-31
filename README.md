@@ -65,7 +65,10 @@ composer install
 1. Start your XAMPP/WAMP server
 2. Open phpMyAdmin: `http://localhost/phpmyadmin`
 3. Create a new database named `onlinevotingsystem`
-4. Import the database schema (if available) or create tables manually
+4. Import the database schema from `assets/onlinevotingsystem.sql` file
+   - In phpMyAdmin, select your database
+   - Click on "Import" tab
+   - Choose the SQL file and click "Go"
 
 ### 4. Database Configuration
 Update the database connection in `admin/inc/config.php`:
@@ -88,55 +91,58 @@ Configure PHPMailer settings for OTP delivery in the relevant files:
 
 ### Elections Table
 ```sql
-CREATE TABLE elections (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    election_topic VARCHAR(256) NOT NULL,
-    no_of_candidates INT NOT NULL,
-    starting_date DATE NOT NULL,
-    ending_date DATE NOT NULL,
-    status VARCHAR(10) DEFAULT 'InActive',
-    inserted_by VARCHAR(256) NOT NULL,
-    inserted_on DATE NOT NULL
-);
+CREATE TABLE `elections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `election_topic` varchar(255) DEFAULT NULL,
+  `no_of_candidates` int(11) DEFAULT NULL,
+  `starting_date` date DEFAULT NULL,
+  `ending_date` date DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `inserted_by` varchar(255) DEFAULT NULL,
+  `inserted_on` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
-### Candidates Table
+### Candidate Details Table
 ```sql
-CREATE TABLE candidates (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    election_id INT NOT NULL,
-    candidate_name VARCHAR(256) NOT NULL,
-    candidate_photo VARCHAR(256),
-    inserted_by VARCHAR(256) NOT NULL,
-    inserted_on DATE NOT NULL,
-    FOREIGN KEY (election_id) REFERENCES elections(id)
-);
+CREATE TABLE `candidate_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `election_id` int(11) DEFAULT NULL,
+  `candidate_name` varchar(255) DEFAULT NULL,
+  `party_details` text DEFAULT NULL,
+  `candidate_photo` text DEFAULT NULL,
+  `inserted_by` varchar(255) DEFAULT NULL,
+  `inserted_on` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
-### Voters Table
+### Users Table
 ```sql
-CREATE TABLE voters (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    email VARCHAR(256) NOT NULL,
-    phone VARCHAR(20),
-    inserted_on DATE NOT NULL
-);
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `mobile_number` varchar(45) DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `user_role` varchar(45) DEFAULT NULL,
+  `otp` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
-### Votes Table
+### Votings Table
 ```sql
-CREATE TABLE votes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    election_id INT NOT NULL,
-    candidate_id INT NOT NULL,
-    voter_id INT NOT NULL,
-    inserted_on DATE NOT NULL,
-    FOREIGN KEY (election_id) REFERENCES elections(id),
-    FOREIGN KEY (candidate_id) REFERENCES candidates(id),
-    FOREIGN KEY (voter_id) REFERENCES voters(id)
-);
+CREATE TABLE `votings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `election_id` int(11) DEFAULT NULL,
+  `voters_id` int(11) DEFAULT NULL,
+  `candidate_id` int(11) NOT NULL,
+  `vote_date` date DEFAULT NULL,
+  `vote_time` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
 ## 👨‍💼 Admin Panel Usage
