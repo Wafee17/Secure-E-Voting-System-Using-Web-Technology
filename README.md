@@ -296,10 +296,6 @@ onlinevotingsystem/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Developer
-
-**Developed at** [canaraengineering.in](https://canaraengineering.in)
-
 ## 🤝 Support
 
 For support and questions:
